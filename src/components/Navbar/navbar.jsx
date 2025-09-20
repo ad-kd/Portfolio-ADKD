@@ -4,13 +4,6 @@ import '../../index.css'
 const navbar = () => {
 
   useEffect(() => {
-    // Mobile menu toggle
-    // const mobileMenuButton = document.querySelector('.md\\:hidden');
-    // mobileMenuButton.addEventListener('click', () => {
-    //   const nav = document.querySelector('nav');
-    //   nav.classList.toggle('hidden');
-    // });
-
   }, [])
 
   let MobieMenuClick = () => {
