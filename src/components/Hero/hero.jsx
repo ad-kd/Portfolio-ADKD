@@ -4,7 +4,7 @@ import me from '../../assets/me.jpeg'
 const Hero = () => {
   return (
     <div>
-      <header className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white min-h-screen flex items-center justify-center overflow-hidden">
+      <header className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white min-h-screen flex items-center justify-center overflow-hidden" id='hero'>
         
         {/* Interactive animated gradient background */}
         <div className="absolute inset-0">
