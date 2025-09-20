@@ -45,20 +45,20 @@ const contact = () => {
                                         <label className="block text-sm font-medium mb-1">Your Name</label>
                                         <input type="text" id="name" name='name'
                                             className="w-full px-4 py-3 rounded-lg bg-indigo-700/50 border border-indigo-500 focus:border-indigo-300 focus:outline-none"
-                                            placeholder="Your Name"/>
+                                            placeholder="Your Name" required/>
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium mb-1">Your Email</label>
                                         <input type="email" id="email" name='email'
                                             className="w-full px-4 py-3 rounded-lg bg-indigo-700/50 border border-indigo-500 focus:border-indigo-300 focus:outline-none"
-                                            placeholder="you@example.com"/>
+                                            placeholder="you@example.com" required/>
                                     </div>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Subject</label>
                                     <input type="text" id="subject" name='subject'
                                         className="w-full px-4 py-3 rounded-lg bg-indigo-700/50 border border-indigo-500 focus:border-indigo-300 focus:outline-none"
-                                        placeholder="Project Inquiry"/>
+                                        placeholder="Project Inquiry" required/>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Your Message</label>
