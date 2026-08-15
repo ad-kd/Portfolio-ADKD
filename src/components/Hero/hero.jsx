@@ -1,77 +1,108 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import me from "../../assets/me.png";
 
 const Hero = () => {
+  const words = ["Software Developer", "Full Stack Developer", "MCA Student", "Tech Enthusiast"];
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    const currentWord = words[currentWordIndex];
+    
+    if (isDeleting) {
+      // Deleting text
+      timer = setTimeout(() => {
+        setCurrentText(currentWord.substring(0, currentText.length - 1));
+      }, 50);
+    } else {
+      // Typing text
+      timer = setTimeout(() => {
+        setCurrentText(currentWord.substring(0, currentText.length + 1));
+      }, 100);
+    }
+
+    // Switch modes
+    if (!isDeleting && currentText === currentWord) {
+      timer = setTimeout(() => setIsDeleting(true), 1500); // pause at full word
+    } else if (isDeleting && currentText === "") {
+      setIsDeleting(false);
+      setCurrentWordIndex((prev) => (prev + 1) % words.length);
+    }
+
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, currentWordIndex]);
+
   return (
     <header
       id="hero"
       className="relative min-h-screen overflow-hidden flex items-center justify-center text-white
-      bg-gradient-to-br from-gray-900 via-gray-800 to-black"
+      bg-[#090d16]"
     >
-      {/* ===== Animated Background ===== */}
-      <div className="absolute inset-0">
-        {/* soft radial glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(99,102,241,0.18),transparent_60%)] animate-[pulse_6s_ease-in-out_infinite]" />
+      {/* ===== Ambient Glow & Background Mesh ===== */}
+      <div className="absolute inset-0 z-0">
+        {/* Soft colorful radial glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(99,102,241,0.22),transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(6,182,212,0.18),transparent_55%)]" />
 
-        {/* grid overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(255,255,255,0.05)_1px,transparent_1px)]
-        bg-[size:48px_48px] opacity-40" />
+        {/* High-tech grid overlay */}
+        <div 
+          className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] 
+          bg-[size:40px_40px] opacity-60" 
+        />
 
-        {/* floating orbs */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-indigo-500/20 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-float-delayed" />
+        {/* Floating animated blobs */}
+        <div className="absolute top-1/4 left-10 w-80 h-80 bg-indigo-600/15 rounded-full blur-[100px] animate-float" />
+        <div className="absolute bottom-1/4 right-10 w-[400px] h-[400px] bg-purple-600/15 rounded-full blur-[120px] animate-float-delayed" />
       </div>
 
-      {/* dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/50" />
+      {/* ===== Main Hero Layout ===== */}
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16 py-20">
+        <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-16">
 
-      {/* ===== Main Content ===== */}
-      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 sm:px-10 lg:px-16 2xl:px-24">
-        <div className="flex flex-col-reverse lg:flex-row items-center justify-between py-24 gap-16">
+          {/* ===== Left Side Text Section ===== */}
+          <div className="w-full lg:w-3/5 text-center lg:text-left animate-fade-in-up">
+            {/* Intro Tag */}
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-6">
+              <span className="w-2 h-2 rounded-full bg-indigo-400 animate-ping"></span>
+              Open to Opportunities
+            </span>
 
-          {/* ===== Text Section ===== */}
-          <div className="w-full lg:w-1/2 text-center lg:text-left animate-fade-in-up">
-
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-8xl font-extrabold leading-tight mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-7xl font-extrabold leading-tight mb-4">
               Hi, I’m{" "}
-              <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-600
+              <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400
               bg-clip-text text-transparent animate-gradient">
                 Adhithya K
               </span>
             </h1>
 
-            <div className="text-xl sm:text-2xl md:text-3xl 2xl:text-4xl font-medium text-indigo-300 tracking-wide mb-6">
-              Software Developer & CS Student
+            {/* Dynamic Typewriter Title */}
+            <div className="text-xl sm:text-2xl md:text-3xl font-medium tracking-wide mb-6 h-10 flex items-center justify-center lg:justify-start">
+              <span className="text-gray-400 mr-2">I am a</span>
+              <span className="text-cyan-400 font-semibold border-r-2 border-cyan-400 animate-pulse pr-1">
+                {currentText}
+              </span>
             </div>
 
-            <p
-              className="text-base sm:text-lg md:text-xl 2xl:text-2xl text-gray-300
-              max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10
-              backdrop-blur-sm bg-black/20 rounded-xl p-4"
-            >
-              Exploring{" "}
-              <span className="text-indigo-400">software development</span>,{" "}
-              <span className="text-indigo-400">machine learning</span>, and{" "}
-              <span className="text-indigo-400">web technologies</span>.  
-              I love building{" "}
-              <span className="text-indigo-300">creative solutions</span> that make an impact.
+            <p className="text-base sm:text-lg text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10">
+              Exploring <span className="text-indigo-400 font-medium">software development</span>,{" "}
+              <span className="text-indigo-400 font-medium">machine learning</span>, and{" "}
+              <span className="text-indigo-400 font-medium">web technologies</span>. I craft robust and creative digital experiences that merge academic foundation with real-world practicality.
             </p>
 
-            {/* ===== Buttons (UNCHANGED) ===== */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-4 2xl:gap-6">
+            {/* Action Buttons */}
+            <div className="flex flex-wrap justify-center lg:justify-start gap-4">
               <a
                 href="#projects"
-                className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-full font-medium
-                transition-all duration-300 shadow-lg hover:scale-105"
+                className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 rounded-full font-medium transition-all duration-300 shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:scale-105"
               >
                 View My Work
               </a>
 
               <a
                 href="#contact"
-                className="px-6 py-3 bg-transparent border-2 border-indigo-400
-                hover:bg-indigo-500 hover:text-white rounded-full font-medium
-                transition-all duration-300"
+                className="px-8 py-3 bg-transparent border border-gray-700 hover:border-indigo-500 rounded-full font-medium transition-all duration-300 text-gray-300 hover:text-white"
               >
                 Contact Me
               </a>
@@ -79,48 +110,48 @@ const Hero = () => {
               <a
                 href="/resume.pdf"
                 download="Adhithya-K-Resume.pdf"
-                className="px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-600
-                hover:from-indigo-600 hover:to-purple-500 rounded-full font-medium
-                transition-all duration-300 shadow-lg hover:scale-105"
+                className="px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 rounded-full font-medium transition-all duration-300 shadow-[0_0_20px_rgba(168,85,247,0.3)] hover:scale-105"
               >
-                Resume
+                <i className="fas fa-download mr-2 text-sm"></i> Resume
               </a>
             </div>
           </div>
 
-          {/* ===== Image Section ===== */}
-          <div className="w-full lg:w-1/2 flex justify-center animate-fade-in-up">
-            <div
-              className="relative w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80
-              lg:w-96 lg:h-96 2xl:w-[420px] 2xl:h-[420px]
-              rounded-full overflow-hidden group
-              shadow-[0_0_80px_rgba(99,102,241,0.35)]"
-            >
-              {/* rotating gradient ring */}
-              <div className="absolute inset-0 rounded-full p-[6px]
-              bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500
-              animate-spin-slow">
-                <div className="w-full h-full rounded-full bg-gray-900" />
+          {/* ===== Right Side Avatar / Illustration ===== */}
+          <div className="w-full lg:w-2/5 flex justify-center animate-fade-in-up">
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[380px] lg:h-[380px] group">
+              {/* Spinning Accent Border Ring */}
+              <div className="absolute inset-0 rounded-full p-[3px] bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 animate-spin-slow opacity-80">
+                <div className="w-full h-full rounded-full bg-[#090d16]" />
               </div>
 
-              <img
-                src={me}
-                alt="Profile"
-                className="relative z-10 w-full h-full rounded-full object-cover
-                transition-transform duration-500 group-hover:scale-105"
-              />
+              {/* Glowing Ambient Outer Circle */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-indigo-500 to-cyan-400 blur-2xl opacity-25 group-hover:opacity-40 transition-opacity duration-500" />
+
+              {/* Portrait Image Container */}
+              <div className="relative z-10 w-full h-full rounded-full overflow-hidden p-3">
+                <img
+                  src={me}
+                  alt="Adhithya K"
+                  className="w-full h-full rounded-full object-cover transition-transform duration-500 group-hover:scale-105 bg-slate-900"
+                />
+              </div>
             </div>
           </div>
+
         </div>
       </div>
 
-      {/* ===== Scroll Indicator ===== */}
-      <div className="absolute bottom-10 left-0 right-0 text-center animate-bounce">
+      {/* ===== Scroll Down Indicator ===== */}
+      <div className="absolute bottom-8 left-0 right-0 text-center hidden md:flex flex-col items-center justify-center z-10">
         <a
           href="#about"
-          className="text-indigo-400 hover:text-indigo-300 transition-colors duration-300 text-3xl"
+          className="text-gray-500 hover:text-indigo-400 transition-colors duration-300 flex flex-col items-center gap-1.5"
         >
-          ↓
+          <span className="text-xs tracking-widest uppercase">Scroll Down</span>
+          <div className="w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center p-1">
+            <div className="w-1.5 h-3 bg-indigo-400 rounded-full animate-bounce"></div>
+          </div>
         </a>
       </div>
     </header>

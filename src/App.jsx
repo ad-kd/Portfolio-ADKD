@@ -25,19 +25,19 @@ const App = () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in');
+          entry.target.classList.add('active');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.15 });
 
-    document.querySelectorAll('.animate-on-scroll').forEach(elem => {
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(elem => {
       observer.observe(elem);
     });
     
   }, [])
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Hero />
       <Navbar />
       <About />

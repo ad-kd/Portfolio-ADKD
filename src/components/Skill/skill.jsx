@@ -1,84 +1,106 @@
 import React from 'react'
 
-const skill = () => {
-    return (
-        <div>
-            <section id="skills" className="py-20 bg-gray-50">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Technical <span
-                            className="gradient-text">Skills</span></h2>
-                        <div className="w-20 h-1 bg-gradient-to-r from-indigo-500 to-cyan-500 mx-auto"></div>
-                        <p className="text-gray-600 max-w-2xl mx-auto mt-6">Here are the technologies I've worked with throughout my
-                            academic career and personal projects.</p>
-                    </div>
+const Skill = () => {
+  const skillCategories = [
+    {
+      title: "Programming",
+      icon: "fas fa-code",
+      color: "text-indigo-400 bg-indigo-500/10",
+      skills: [
+        { name: "C/C++", icon: "fas fa-terminal", iconColor: "text-blue-400" },
+        { name: "Python", icon: "fab fa-python", iconColor: "text-yellow-400" },
+        { name: "JavaScript", icon: "fab fa-js", iconColor: "text-yellow-300" },
+        { name: "SQL", icon: "fas fa-database", iconColor: "text-indigo-300" }
+      ]
+    },
+    {
+      title: "Web Dev",
+      icon: "fas fa-globe",
+      color: "text-cyan-400 bg-cyan-500/10",
+      skills: [
+        { name: "React", icon: "fab fa-react", iconColor: "text-cyan-400 animate-spin-slow" },
+        { name: "Node.js", icon: "fab fa-node-js", iconColor: "text-emerald-400" },
+        { name: "MongoDB", icon: "fas fa-leaf", iconColor: "text-green-500" },
+        { name: "Django", icon: "fab fa-python", iconColor: "text-emerald-600" },
+        { name: "HTML & CSS", icon: "fab fa-html5", iconColor: "text-orange-500" }
+      ]
+    },
+    {
+      title: "Data Science",
+      icon: "fas fa-chart-line",
+      color: "text-purple-400 bg-purple-500/10",
+      skills: [
+        { name: "Pandas", icon: "fas fa-table", iconColor: "text-indigo-400" },
+        { name: "NumPy", icon: "fas fa-calculator", iconColor: "text-purple-400" }
+      ]
+    },
+    {
+      title: "Tools",
+      icon: "fas fa-cogs",
+      color: "text-pink-400 bg-pink-500/10",
+      skills: [
+        { name: "Git", icon: "fab fa-git-alt", iconColor: "text-orange-500" },
+        { name: "Linux", icon: "fab fa-linux", iconColor: "text-slate-300" },
+        { name: "VS Code", icon: "fas fa-code-branch", iconColor: "text-sky-400" },
+        { name: "Figma", icon: "fab fa-figma", iconColor: "text-pink-400" }
+      ]
+    }
+  ];
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div className="bg-white rounded-xl shadow-lg p-6 transition-all duration-300 card-hover">
-                            <div className="flex items-center mb-4">
-                                <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
-                                    <i className="fas fa-code text-indigo-500"></i>
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-800">Programming</h3>
-                            </div>
-                            <div className="flex flex-wrap gap-3">
-                                <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">C/C++</span>
-                                <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">Python</span>
-                                <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">JavaScript</span>
-                                <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">SQL</span>
+  return (
+    <section id="skills" className="py-24 bg-[#080d18] relative overflow-hidden">
+      {/* Background glowing blob */}
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-indigo-500/5 rounded-full blur-[100px] pointer-events-none" />
 
-                            </div>
-                        </div>
-
-                        
-                        <div className="bg-white rounded-xl shadow-lg p-6 transition-all duration-300 card-hover">
-                            <div className="flex items-center mb-4">
-                                <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
-                                    <i className="fas fa-globe text-indigo-500"></i>
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-800">Web Dev</h3>
-                            </div>
-                            <div className="flex flex-wrap gap-3">
-                                <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">React</span>
-                                <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">Node.js</span>
-                                <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">MongoDB</span>
-                            </div>
-                        </div>
-
-                       
-                        <div className="bg-white rounded-xl shadow-lg p-6 transition-all duration-300 card-hover">
-                            <div className="flex items-center mb-4">
-                                <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
-                                    <i className="fas fa-chart-line text-indigo-500"></i>
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-800">Data Science</h3>
-                            </div>
-                            <div className="flex flex-wrap gap-3">
-                                <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">Pandas</span>
-                                <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">NumPy</span>
-                            </div>
-                        </div>
-
-                        
-                        <div className="bg-white rounded-xl shadow-lg p-6 transition-all duration-300 card-hover">
-                            <div className="flex items-center mb-4">
-                                <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
-                                    <i className="fas fa-cogs text-indigo-500"></i>
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-800">Tools</h3>
-                            </div>
-                            <div className="flex flex-wrap gap-3">
-                                <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">Git</span>
-                                <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">Linux</span>
-                                <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">VS Code</span>
-                                <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">Figma</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+      <div className="container mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
+        {/* Section Title */}
+        <div className="text-center mb-16 reveal">
+          <h2 className="text-3xl md:text-5xl font-extrabold mb-4 text-white tracking-tight">
+            Technical <span className="gradient-text">Skills</span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 mx-auto rounded-full"></div>
+          <p className="text-gray-400 max-w-xl mx-auto mt-6">
+            Here are the technologies I've worked with throughout my academic career and personal projects.
+          </p>
         </div>
-    )
+
+        {/* Skills Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {skillCategories.map((category, index) => (
+            <div 
+              key={index}
+              className="glass-card rounded-2xl p-6 border border-slate-800/80 hover:border-indigo-500/30 shadow-lg reveal-scale flex flex-col justify-between"
+            >
+              <div>
+                {/* Category Header */}
+                <div className="flex items-center gap-3 mb-6">
+                  <div className={`w-10 h-10 rounded-xl ${category.color} flex items-center justify-center`}>
+                    <i className={`${category.icon} text-lg`}></i>
+                  </div>
+                  <h3 className="text-lg font-bold text-white tracking-wide">
+                    {category.title}
+                  </h3>
+                </div>
+
+                {/* Skills Tags List */}
+                <div className="flex flex-wrap gap-2.5">
+                  {category.skills.map((skill, sIdx) => (
+                    <span 
+                      key={sIdx}
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/60 border border-slate-800/80 text-gray-300 rounded-xl text-sm transition-all duration-300 hover:bg-slate-800/80 hover:text-white hover:border-slate-700/80 cursor-default"
+                    >
+                      <i className={`${skill.icon} ${skill.iconColor}`}></i>
+                      <span>{skill.name}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
 }
 
-export default skill
+export default Skill

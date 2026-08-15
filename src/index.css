@@ -1,157 +1,229 @@
 @import "tailwindcss";
 
 :root {
-    --primary: #6366f1;
-    --primary-dark: #4f46e5;
-    --secondary: #06b6d4;
-    --dark: #1e293b;
-    --light: #f8fafc;
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --secondary: #06b6d4;
+  --accent: #a855f7;
+  --dark-bg: #0b0f19;
+  --card-bg: rgba(30, 41, 59, 0.4);
+  --border-color: rgba(255, 255, 255, 0.08);
 }
 
 body {
-    font-family: 'Space Grotesk', sans-serif;
-    background-color: #f9fafb;
-    color: var(--dark);
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: var(--dark-bg);
+  color: #f1f5f9;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
+/* Custom Gradients */
 .gradient-text {
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.card-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+.gradient-bg {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
 }
 
-.project-card:hover .project-overlay {
-    opacity: 1;
+/* Glassmorphism Styles */
+.glass-nav {
+  background: rgba(11, 15, 25, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
 }
 
-.section-divider {
-    height: 100px;
-    width: 100%;
-    background: linear-gradient(to bottom right, transparent 49.9%, var(--light) 50%);
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.glass-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.15);
+}
+
+.glass-input {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-color);
+  color: #f8fafc;
+  transition: all 0.3s ease;
+}
+
+.glass-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.2);
+  outline: none;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--dark-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Smooth Scroll-spy highlights */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--primary);
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Animation Keyframes */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
-
-.animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
-}
-
-.typewriter {
-    overflow: hidden;
-    border-right: .15em solid var(--primary);
-    white-space: nowrap;
-    margin: 0 auto;
-    letter-spacing: .15em;
-    animation:
-        typing 3.5s steps(40, end),
-        blink-caret .75s step-end infinite;
-}
-
-@keyframes typing {
-    from {
-        width: 0
-    }
-
-    to {
-        width: 100%
-    }
-}
-
-@keyframes blink-caret {
-
-    from,
-    to {
-        border-color: transparent
-    }
-
-    50% {
-        border-color: var(--primary);
-    }
-}
-
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-25px); }
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.05); }
 }
-.animate-float {
-  animation: float 8s ease-in-out infinite;
-}
-.animate-float-delayed {
-  animation: float 10s ease-in-out infinite 2s;
+
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0) scale(1.05); }
+  50% { transform: translateY(20px) scale(0.95); }
 }
 
 @keyframes spin-slow {
   100% { transform: rotate(360deg); }
 }
-.animate-spin-slow {
-  animation: spin-slow 15s linear infinite;
-}
 
 @keyframes fade-in-up {
-  0% { opacity: 0; transform: translateY(20px); }
+  0% { opacity: 0; transform: translateY(30px); }
   100% { opacity: 1; transform: translateY(0); }
 }
-.animate-fade-in-up {
-  animation: fade-in-up 1.2s ease forwards;
-}
 
-@keyframes slide-in-left {
-  0% { opacity: 0; transform: translateX(-40px); }
-  100% { opacity: 1; transform: translateX(0); }
-}
-.animate-slide-in-left {
-  animation: slide-in-left 1s ease forwards;
-}
-
-@keyframes gradient {
+@keyframes gradient-shift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient 6s ease infinite;
+
+@keyframes line-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 }
 
-@keyframes slow-pan {
-  0% { background-position: 0 0; }
-  100% { background-position: 100px 100px; }
-}
-.animate-slow-pan {
-  animation: slow-pan 20s linear infinite;
+/* Animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
 }
 
-/* maked */
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
 .animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-.animate-float-delayed {
   animation: float 8s ease-in-out infinite;
 }
 
-@keyframes spinSlow {
-  to { transform: rotate(360deg); }
+.animate-float-delayed {
+  animation: float-delayed 10s ease-in-out infinite;
 }
+
 .animate-spin-slow {
-  animation: spinSlow 12s linear infinite;
+  animation: spin-slow 20s linear infinite;
 }
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Utilities for cards */
+.gradient-border-hover {
+  position: relative;
+}
+.gradient-border-hover::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, transparent, transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: background 0.4s ease;
+  pointer-events: none;
+}
+.gradient-border-hover:hover::before {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+/* Scroll Reveal Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-scale.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
