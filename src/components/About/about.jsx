@@ -42,12 +42,12 @@ const About = () => {
             </h3>
             
             <p className="text-gray-400 mb-6 leading-relaxed">
-              I am currently pursuing my Master of Computer Applications (MCA) at Kamaraj College, Madurai. 
+              I am currently pursuing my Master of Computer Applications (MCA) at Madurai Kamaraj University College, Madurai. 
               My academic path is fueled by curiosity, a relentless work ethic, and a passion for solving complex computational problems.
             </p>
             
             <p className="text-gray-400 mb-8 leading-relaxed">
-              Beyond standard university coursework, I actively engage in open-source development, coding hackathons, and designing modular game environments. My mission is to build software products that bridge complex science with elegant user solutions.
+              Beyond standard university coursework, I actively engage in open-source development, coding hackathons, designing modular game environments and Freelancing. My mission is to build software products that bridge complex science with elegant user solutions.
             </p>
 
             {/* Micro Cards Grid */}
